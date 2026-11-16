@@ -1,0 +1,21 @@
+# ======================================================================
+# ARCHIVO: uploads/productos/.htaccess
+# SEGURIDAD DE LA CARPETA DE FOTOS.
+# ======================================================================
+# En esta carpeta solo van fotos: nunca se ejecuta código PHP
+# Apaga el motor de PHP en esta carpeta.
+<IfModule mod_php.c>
+  php_flag engine off
+</IfModule>
+<IfModule mod_php7.c>
+  php_flag engine off
+</IfModule>
+<IfModule mod_php8.c>
+  php_flag engine off
+</IfModule>
+# Aunque lo anterior falle: prohíbe el acceso a archivos con extensión php, phtml, phar, php5, etc.
+<FilesMatch "\.(php|phtml|phar|php[0-9])$">
+  Require all denied
+</FilesMatch>
+# Impide que se pueda ver el listado de archivos de la carpeta desde el navegador.
+Options -Indexes
